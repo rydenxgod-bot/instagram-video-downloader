@@ -120,7 +120,7 @@ export function HowItWorks() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-full bg-teal-500 px-5 py-2 text-sm font-medium text-white shadow-md hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600"
               >
-                ➕ Join @RydenXGod
+                🚀 Join RydenXGod
               </a>
             </div>
           </div>
