@@ -9,7 +9,7 @@ export const siteConfig = {
     "Fast, free, and no login required. Just paste the URL and download.",
   ogDescription:
     "Fast, free, and no login required. Just paste the URL and download.",
-  url: "https://gram-grabberz.vercel.com",
+  url: "https://ig-ryden-web.vercel.app",
 };
 
 export const siteMetadata: Metadata = {
