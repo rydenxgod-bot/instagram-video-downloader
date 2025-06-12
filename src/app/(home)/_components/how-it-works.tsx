@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 
-import { Copy, Download, Clipboard } from "lucide-react";
+import { Copy, Download, Clipboard, Send } from "lucide-react";
 
 import { homeLinks, homeSections } from "@/lib/constants";
 
@@ -30,9 +30,10 @@ export function HowItWorks() {
             </p>
           </div>
 
-          {/* Desktop version */}
+          {/* Desktop Steps */}
           <div className="relative mx-auto mt-12 hidden w-full max-w-4xl md:block">
             <div className="grid grid-cols-3 gap-4">
+              {/* Step 1 */}
               <div className="relative flex flex-col items-center space-y-4">
                 <div className="z-10 flex h-16 w-16 items-center justify-center rounded-full bg-teal-500 text-xl font-bold text-white shadow-lg">
                   1
@@ -50,6 +51,7 @@ export function HowItWorks() {
                 </div>
               </div>
 
+              {/* Step 2 */}
               <div className="relative flex flex-col items-center space-y-4">
                 <div className="z-10 flex h-16 w-16 items-center justify-center rounded-full bg-teal-500 text-xl font-bold text-white shadow-lg">
                   2
@@ -67,6 +69,7 @@ export function HowItWorks() {
                 </div>
               </div>
 
+              {/* Step 3 */}
               <div className="flex flex-col items-center space-y-4">
                 <div className="z-10 flex h-16 w-16 items-center justify-center rounded-full bg-teal-500 text-xl font-bold text-white shadow-lg">
                   3
@@ -86,61 +89,47 @@ export function HowItWorks() {
             </div>
           </div>
 
-          {/* Mobile version with vertical steps */}
+          {/* Mobile Steps */}
           <div className="relative mx-auto w-full max-w-sm space-y-8 md:hidden">
-            {/* Vertical connecting line */}
             <div className="absolute top-0 bottom-16 left-4 w-0.5 bg-teal-200"></div>
 
-            <div className="relative flex items-start space-x-6">
-              <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500 font-bold text-white">
-                1
-              </div>
-              <div className="flex-1 rounded-lg border border-gray-100 bg-white p-4 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-                <div className="mb-2 flex items-center">
-                  <Copy className="mr-2 h-5 w-5 text-teal-500" />
-                  <h3 className="text-lg font-bold">{t("steps.copy.title")}</h3>
+            {[1, 2, 3].map((step) => {
+              const icons = [<Copy />, <Clipboard />, <Download />];
+              const titles = [
+                t("steps.copy.title"),
+                t("steps.paste.title"),
+                t("steps.download.title"),
+              ];
+              const descs = [
+                t("steps.copy.descriptionMobile"),
+                t("steps.paste.descriptionMobile"),
+                t("steps.download.descriptionMobile"),
+              ];
+              return (
+                <div
+                  key={step}
+                  className="relative flex items-start space-x-6"
+                >
+                  <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500 font-bold text-white">
+                    {step}
+                  </div>
+                  <div className="flex-1 rounded-lg border border-gray-100 bg-white p-4 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+                    <div className="mb-2 flex items-center">
+                      {React.cloneElement(icons[step - 1], {
+                        className: "mr-2 h-5 w-5 text-teal-500",
+                      })}
+                      <h3 className="text-lg font-bold">{titles[step - 1]}</h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm">
+                      {descs[step - 1]}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-muted-foreground text-sm">
-                  {t("steps.copy.descriptionMobile")}
-                </p>
-              </div>
-            </div>
-
-            <div className="relative flex items-start space-x-6">
-              <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500 font-bold text-white">
-                2
-              </div>
-              <div className="flex-1 rounded-lg border border-gray-100 bg-white p-4 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-                <div className="mb-2 flex items-center">
-                  <Clipboard className="mr-2 h-5 w-5 text-teal-500" />
-                  <h3 className="text-lg font-bold">
-                    {t("steps.paste.title")}
-                  </h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  {t("steps.paste.descriptionMobile")}
-                </p>
-              </div>
-            </div>
-
-            <div className="relative flex items-start space-x-6">
-              <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500 font-bold text-white">
-                3
-              </div>
-              <div className="flex-1 rounded-lg border border-gray-100 bg-white p-4 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-                <div className="mb-2 flex items-center">
-                  <Download className="mr-2 h-5 w-5 text-teal-500" />
-                  <h3 className="text-lg font-bold">
-                    {t("steps.download.title")}
-                  </h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  {t("steps.download.descriptionMobile")}
-                </p>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
+          {/* CTA Button */}
           <div className="pt-8">
             <Button
               className="bg-teal-500 text-white hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600"
@@ -148,6 +137,25 @@ export function HowItWorks() {
             >
               <a href={homeLinks.hero}>{t("ctaButton")}</a>
             </Button>
+          </div>
+
+          {/* 🔥 Telegram Banner */}
+          <div className="mt-10 w-full rounded-xl bg-teal-100 px-6 py-6 text-center shadow-md dark:bg-teal-900">
+            <h3 className="mb-2 text-2xl font-bold text-teal-800 dark:text-teal-100">
+              Join Us on Telegram
+            </h3>
+            <p className="mb-4 text-muted-foreground text-sm">
+              Get updates, tips, and features directly in your inbox!
+            </p>
+            <a
+              href="https://t.me/RydenXGod"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-teal-500 px-5 py-2 font-semibold text-white transition hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600"
+            >
+              <Send className="mr-2 h-4 w-4" />
+              Join @RydenXGod
+            </a>
           </div>
         </div>
       </div>
